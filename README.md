@@ -49,8 +49,8 @@ independently of the interface or browser language.
 - `npm run build` — production assets in `dist/`.
 - Deploy the built static assets with Vercel; no backend or API key is needed.
   First link the build folder explicitly (Vite rebuilds remove that link):
-  `npx vercel link --cwd dist --project esl-lesson-adventure --yes --scope mariowabnigs-projects`
-  Then `npx vercel deploy dist --prod --scope mariowabnigs-projects`.
+  `npx vercel link --cwd dist --project esl-lesson-adventure --yes --scope northpixelworks`
+  Then `npx vercel deploy dist --prod --scope northpixelworks`.
   Never deploy an unlinked `dist` folder: it can create a separate project named dist.
 - Rebuild before deploying changes. Vercel connected the existing GitHub repository. Local edits must be committed and pushed separately to reach GitHub; CLI deployments publish the current build.
 
