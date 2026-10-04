@@ -3,22 +3,36 @@
 <!-- BEGIN:cross-agent-agent-rules -->
 ## Cross-Agent Compatibility
 
-This repository is prepared for both Codex and Claude Code. Keep durable project instructions here in `AGENTS.md`; Claude loads `CLAUDE.md`, which should import this file with `@AGENTS.md`.
+This repository is prepared for both Codex and Claude Code. `AGENTS.md` is the single instruction file for every agent; keep durable project instructions here.
 
 ### Start Here
 - [README.md](README.md) — README.
-- [ARCHITECTURE.md](ARCHITECTURE.md) — architecture.
+- [ARCHITECTURE.md](ARCHITECTURE.md) — required reading: app purpose, folder structure, module map, data flow, gotchas.
 - [docs/AGENT_GUIDE.md](docs/AGENT_GUIDE.md) — agent guide.
 
-### Legacy Guidance
-- Read `CLAUDE.md` in this directory for project guidance that has not been migrated yet.
+### Guidance Notes
 - Translate Claude-specific tool, memory, slash-command, or subagent wording to Codex equivalents.
-- Do not edit `CLAUDE.md` unless the user explicitly asks to migrate or update Claude guidance.
 
 ### Common Commands
 - Install dependencies with `npm install`.
-- Local dev: `npm run dev`.
-- Build: `npm run build`.
+- Local dev: `npm run dev` (Vite dev server, http://localhost:5173).
+- Build: `npm run build` (production build to `dist/`).
+- Preview production build: `npm run preview`.
+
+### Stack
+- React 19 + TypeScript + Vite 6 + Tailwind CSS 4
+
+### Critical Gotchas
+- **No router** — navigation is a flat integer switch (`activeModule`) in `App.tsx`
+- **No test suite** — no test runner configured
+- **Module1_AlphabetCreator** is unreachable from nav (superseded by Module0)
+- **Module4_Battleships** takes vocab as props, not from context — unique among game modules
+- **`Module6_LetterExplanation/`** is imported as `Module7LetterExplanation` — naming mismatch, don't rename without fixing the import
+- **Two Module4_ folders** (`Battleships` + `Bingo`) — unrelated games, naming collision
+- Default UI language is `'de'` (German) — bilingual app (DE teacher / EN student)
+- Images are emoji strings OR `data:image/svg+xml;base64,` — always use `ImageRenderer` component
+- `localStorage` keys: `esl-lesson-vocabulary` (vocab) and `esl-lesson-settings` (settings)
+- Minimum 15 words required (`MIN_WORDS_FOR_GAMES`) before Games button appears
 
 ### Working Rules
 - Keep changes small, reviewable, and tied to the requested behavior.
