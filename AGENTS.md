@@ -14,17 +14,20 @@ This repository is prepared for both Codex and Claude Code. `AGENTS.md` is the s
 - Translate Claude-specific tool, memory, slash-command, or subagent wording to Codex equivalents.
 
 ### Common Commands
-- Install dependencies with `npm install`.
+- Install locked dependencies with `npm ci` (Node.js 24, also used in CI).
 - Local dev: `npm run dev` (Vite dev server, http://localhost:5173).
+- Tests: `npm test` (Vitest regression tests in `tests/`).
+- TypeScript validation: `npm run typecheck`.
 - Build: `npm run build` (production build to `dist/`).
 - Preview production build: `npm run preview`.
+- CI: `.github/workflows/ci.yml` runs tests, typecheck, and build on pushes to `main` and pull requests targeting `main`.
 
 ### Stack
-- React 19 + TypeScript + Vite 6 + Tailwind CSS 4
+- React 19 + TypeScript 7 + Vite 8 + Tailwind CSS 4; Vitest 4.1.12 (locked test runner)
 
 ### Critical Gotchas
 - **No router** — navigation is a flat integer switch (`activeModule`) in `App.tsx`
-- **No test suite** — no test runner configured
+- **Test suite** — seven Vitest files in `tests/` cover Bingo export, coordinates, emoji lookup, hunt placement, treasure game mechanics, word guessing, and prepared word pictures; run all three CI checks before submitting changes.
 - **Module1_AlphabetCreator** is unreachable from nav (superseded by Module0)
 - **Module4_Battleships** takes vocab as props, not from context — unique among game modules
 - **`Module6_LetterExplanation/`** is imported as `Module7LetterExplanation` — naming mismatch, don't rename without fixing the import
